@@ -1,9 +1,8 @@
 import getCurrentUser from "@/actions/get-current-user";
 import { Login } from "@/components/signIn";
+import SignOutComponent from "@/components/signOut";
 import { SignUp } from "@/components/signUp";
-import { Button } from "@/components/ui/button";
 import React, { Fragment } from "react";
-import AppContext from "../context";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -26,7 +25,10 @@ export default async function ProtectedLayout({ children }: LayoutProps) {
                 <Login />
               </Fragment>
             ) : (
-              <p className="text-sm  text-red-500">{user?.email}</p>
+              <Fragment>
+                <p className="text-sm  text-red-500">{user?.email}</p>
+                <SignOutComponent />
+              </Fragment>
             )}
           </div>
         </div>

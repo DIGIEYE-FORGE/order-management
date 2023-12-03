@@ -16,6 +16,7 @@ import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export function Login() {
   const router = useRouter();
@@ -29,15 +30,15 @@ export function Login() {
       email: emailRef.current?.value,
       password: passwordRef.current?.value,
       redirect: false,
-      // callbackUrl: "/",
     })
       .then((res) => {
-        // console.log(res);
-        // setOpen(false);
         if (res?.ok) {
           router.refresh();
           console.log(res.error);
           setOpen(false);
+        }
+        if (res?.error) {
+          toast.error(res?.error || "Something went wrong");
         }
       })
       .catch((err) => {

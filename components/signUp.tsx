@@ -33,7 +33,6 @@ export function SignUp() {
     name: "",
     email: "",
     password: "",
-    role: "",
   });
 
   const handleSubmit = async () => {
@@ -100,25 +99,6 @@ export function SignUp() {
                 setData({ ...data, password: e.target.value });
               }}
             />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="role" className="text-right">
-              role
-            </Label>
-            <Select
-              defaultValue="ADMIN"
-              onValueChange={(value) => {
-                setData({ ...data, role: value });
-              }}
-            >
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Theme" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="ADMIN">Admin</SelectItem>
-                <SelectItem value="USER">User</SelectItem>
-              </SelectContent>
-            </Select>
           </div>
         </div>
         <DialogFooter>

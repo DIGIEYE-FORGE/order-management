@@ -7,6 +7,7 @@ function SignOutComponent() {
   return (
     <Button
       onClick={() => {
+        console.log("i am here");
         signOut();
       }}
     >

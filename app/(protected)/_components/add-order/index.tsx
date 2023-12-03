@@ -30,7 +30,7 @@ import { createOrder } from "@/actions/create-order";
 export default function AddOrder({
   products,
 }: {
-  products: { name: string; id: number }[];
+  products: { name: string; id: string }[];
 }) {
   const closeRef = useRef<ElementRef<"button">>(null);
   const submit = async (formData: FormData) => {

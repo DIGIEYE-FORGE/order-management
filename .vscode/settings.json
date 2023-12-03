@@ -1,3 +1,7 @@
 {
-  "cSpell.words": ["lucide", "sonner"]
+  "cSpell.words": [
+    "lucide",
+    "sonner"
+  ],
+  "nuxt.isNuxtApp": false
 }

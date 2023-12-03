@@ -1,3 +1,4 @@
+import { SignIn } from "@/components/signIn";
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { useLocalStorage } from "usehooks-ts";
@@ -14,9 +15,7 @@ export default function ProtectedLayout({ children }: LayoutProps) {
           className="max-w-screen-2xl mx-auto flex 
         h-full items-center"
         >
-          <Button variant="outline" className="ml-auto" size="sm">
-            Sign IN
-          </Button>
+          <SignIn />
         </div>
       </div>
       <div className="h-full  pt-14 max-w-screen-2xl mx-auto">{children}</div>

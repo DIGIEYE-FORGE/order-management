@@ -21,14 +21,14 @@ import { toast } from "sonner";
 export function Login() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const nameRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
 
   const handleSubmit = async () => {
     signIn("credentials", {
-      email: emailRef.current?.value,
-      password: passwordRef.current?.value,
+      ...data,
       redirect: false,
     })
       .then((res) => {
@@ -46,7 +46,6 @@ export function Login() {
       });
   };
   const handleOpen = (open: boolean) => {
-    console.log(open);
     setOpen(open);
   };
   return (
@@ -65,13 +64,26 @@ export function Login() {
             <Label htmlFor="email" className="text-right">
               email
             </Label>
-            <Input id="email" className="col-span-3" ref={emailRef} />
+            <Input
+              id="email"
+              className="col-span-3"
+              onChange={(e) => {
+                setData({ ...data, email: e.target.value });
+              }}
+            />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="password" className="text-right">
               password
             </Label>
-            <Input id="password" className="col-span-3" ref={passwordRef} />
+            <Input
+              id="password"
+              type="password"
+              className="col-span-3"
+              onChange={(e) => {
+                setData({ ...data, password: e.target.value });
+              }}
+            />
           </div>
         </div>
         <DialogFooter>

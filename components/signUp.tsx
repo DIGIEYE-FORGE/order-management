@@ -24,18 +24,22 @@ import {
 
 export function SignUp() {
   const [open, setOpen] = useState(false);
-  const nameRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-  const roleRef = useRef<HTMLInputElement>(null);
+  // const nameRef = useRef<HTMLInputElement>(null);
+  // const emailRef = useRef<HTMLInputElement>(null);
+  // const passwordRef = useRef<HTMLInputElement>(null);
+  // const roleRef = useRef<HTMLInputElement>(null);
+
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: "",
+  });
 
   const handleSubmit = async () => {
     axios
       .post("/api/signup", {
-        name: nameRef.current?.value,
-        email: emailRef.current?.value,
-        password: passwordRef.current?.value,
-        roleRef: roleRef.current?.value,
+        ...data,
       })
       .then((res) => {
         console.log(res);
@@ -64,13 +68,25 @@ export function SignUp() {
             <Label htmlFor="name" className="text-right">
               name
             </Label>
-            <Input id="name" ref={nameRef} className="col-span-3" />
+            <Input
+              id="name"
+              onChange={(e) => {
+                setData({ ...data, name: e.target.value });
+              }}
+              className="col-span-3"
+            />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="email" className="text-right">
               email
             </Label>
-            <Input id="email" className="col-span-3" ref={emailRef} />
+            <Input
+              id="email"
+              className="col-span-3"
+              onChange={(e) => {
+                setData({ ...data, email: e.target.value });
+              }}
+            />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="password" className="text-right">
@@ -78,9 +94,11 @@ export function SignUp() {
             </Label>
             <Input
               id="password"
-              type="text"
+              type="password"
               className="col-span-3"
-              ref={passwordRef}
+              onChange={(e) => {
+                setData({ ...data, password: e.target.value });
+              }}
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
@@ -90,7 +108,7 @@ export function SignUp() {
             <Select
               defaultValue="ADMIN"
               onValueChange={(value) => {
-                roleRef.current!.value = value;
+                setData({ ...data, role: value });
               }}
             >
               <SelectTrigger className="w-[180px]">
@@ -101,12 +119,6 @@ export function SignUp() {
                 <SelectItem value="USER">User</SelectItem>
               </SelectContent>
             </Select>
-            {/* <Input
-              id="password"
-              type="text"
-              className="col-span-3"
-              ref={passwordRef}
-            /> */}
           </div>
         </div>
         <DialogFooter>

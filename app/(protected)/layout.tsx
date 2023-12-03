@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -25,7 +26,7 @@ export default async function ProtectedLayout({ children }: LayoutProps) {
         h-full items-center justify-end gap-2"
         >
           <span
-            className="mr-auto font-semibold "
+            className="mr-auto font-semibold hidden md:inline-block"
             style={{
               letterSpacing: "-0.0125rem",
             }}
@@ -40,7 +41,24 @@ export default async function ProtectedLayout({ children }: LayoutProps) {
           ) : (
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="ghost">{user?.name}</Button>
+                <Button
+                  variant="ghost"
+                  className="flex items-center gap-2"
+                  size="sm"
+                >
+                  <span className="hidden md:inline-block capitalize">
+                    {user?.name}
+                  </span>
+                  <Avatar className="w-6 h-6">
+                    <AvatarImage
+                      src="https://github.com/shadcn.png"
+                      alt="@shadcn"
+                    />
+                    <AvatarFallback>
+                      {user?.name?.[0].toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                </Button>
               </PopoverTrigger>
               <PopoverContent
                 align="end"

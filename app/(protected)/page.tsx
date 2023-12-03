@@ -11,7 +11,7 @@ export default async function Home() {
       <div className="flex justify-end">
         <span className="font-semibold mr-auto flex items-center gap-2">
           <Barcode size={16} />
-          Product lists
+          Products
         </span>
         <AddProduct />
       </div>

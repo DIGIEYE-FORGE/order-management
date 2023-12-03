@@ -38,10 +38,10 @@ export function ProductsTable({ products }: { products: Product[] }) {
         </TableBody>
         <TableFooter>
           <TableRow>
-            <TableCell colSpan={2}></TableCell>
-            <TableCell className="text-right">
+            <TableCell className="text-left">
               Total: {products.length}
             </TableCell>
+            <TableCell colSpan={3}></TableCell>
           </TableRow>
         </TableFooter>
       </Table>

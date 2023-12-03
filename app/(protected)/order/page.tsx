@@ -3,12 +3,17 @@ import React from "react";
 import { OrdersTable } from "../_components/order-table";
 import AddOrder from "../_components/add-order";
 import getCurrentUser from "@/actions/get-current-user";
+// import { useRouter } from "next/navigation";
 
 export default async function OrderPage() {
+  // const router = useRouter();
+
   const user = await getCurrentUser();
 
   if (!user) {
-    return <div>loading...</div>;
+    // redirect to /
+    
+    return null;
   }
 
   const orders = await db.order.findMany({

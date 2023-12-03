@@ -38,11 +38,11 @@ export default function AddOrder({
       const productId = formData.get("productId");
       const amount = formData.get("amount");
       const data = {
-        productId: parseInt(productId as string),
+        productId: productId as string,
         amount: parseInt(amount as string),
       };
-
       const order = await createOrderSchema.parseAsync(data);
+      // console.log(order);
       await createOrder(order);
       toast.success("Product created");
       closeRef.current?.click();
@@ -73,10 +73,7 @@ export default function AddOrder({
                   </SelectTrigger>
                   <SelectContent>
                     {products.map((product) => (
-                      <SelectItem
-                        key={product.id}
-                        value={product.id.toString()}
-                      >
+                      <SelectItem key={product.id} value={product.id + ""}>
                         {product.name}
                       </SelectItem>
                     ))}

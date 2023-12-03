@@ -51,7 +51,7 @@ export function Login() {
     <Dialog onOpenChange={handleOpen} open={open}>
       <DialogTrigger asChild>
         <Button variant="outline" className="ml-auto" size="sm">
-          Sign IN
+          Sign In
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

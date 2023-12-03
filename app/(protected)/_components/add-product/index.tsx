@@ -83,7 +83,10 @@ export default function AddProduct() {
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button>Add Product</Button>
+          <Button className="flex items-center">
+            <Plus className="h-4 aspect-square" />
+            <span>Add Product</span>
+          </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>

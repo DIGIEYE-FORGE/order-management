@@ -14,7 +14,7 @@ export default async function ProtectedLayout({ children }: LayoutProps) {
     <div className="bg-slate-100 h-full ">
       <div className="h-14 bg-white fixed inset-x-0 top-0 shadow-sm z-10">
         <div
-          className="max-w-screen-2xl mx-auto flex 
+          className="max-w-screen-2xl px-4 mx-auto flex 
         h-full items-center"
         >
           <div className="flex-1"></div>

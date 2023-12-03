@@ -55,7 +55,10 @@ export default function AddOrder({
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button>Add Order</Button>
+          <Button size="sm">
+            <Plus className="h-4 aspect-square" />
+            Add Order
+          </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>

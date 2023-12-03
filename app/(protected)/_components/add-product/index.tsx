@@ -48,7 +48,7 @@ export default function AddProduct() {
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button className="flex items-center">
+          <Button size="sm" className="flex items-center">
             <Plus className="h-4 aspect-square" />
             <span>Add Product</span>
           </Button>

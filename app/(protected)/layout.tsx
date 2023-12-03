@@ -19,7 +19,7 @@ type LayoutProps = {
 export default async function ProtectedLayout({ children }: LayoutProps) {
   const user = await getCurrentUser();
   return (
-    <div className="bg-slate-100 h-full ">
+    <div className="bg-gray-100 h-full ">
       <div className="h-14 bg-white fixed inset-x-0 top-0 shadow-sm z-10">
         <div
           className="max-w-screen-2xl px-6 mx-auto flex 
@@ -62,7 +62,7 @@ export default async function ProtectedLayout({ children }: LayoutProps) {
               </PopoverTrigger>
               <PopoverContent
                 align="end"
-                className="flex p-0 py-3 flex-col max-w-[14rem]"
+                className="flex p-0 py-3 flex-col max-w-min"
                 side="bottom"
                 sideOffset={6}
               >

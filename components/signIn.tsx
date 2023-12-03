@@ -34,7 +34,6 @@ export function Login() {
       .then((res) => {
         if (res?.ok) {
           router.refresh();
-          console.log(res.error);
           setOpen(false);
         }
         if (res?.error) {

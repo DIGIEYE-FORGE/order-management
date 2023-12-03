@@ -3,7 +3,7 @@ import React from "react";
 import { OrdersTable } from "../_components/order-table";
 import AddOrder from "../_components/add-order";
 import getCurrentUser from "@/actions/get-current-user";
-import { ScrollText } from "lucide-react";
+import { ScrollText, User } from "lucide-react";
 
 export default async function OrderPage() {
   const user = await getCurrentUser();
@@ -17,7 +17,7 @@ export default async function OrderPage() {
       product: true,
       user: true,
     },
-    where: { userId: user.id },
+    where: { userId: user.role !== "ADMIN" ? user.id : undefined },
   });
   const products = await db.product.findMany({
     select: { name: true, id: true },

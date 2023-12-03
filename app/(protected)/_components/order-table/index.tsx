@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/table";
 import { Order, Product, User } from "@prisma/client";
 import { toast } from "sonner";
-import { X, Check, AlertTriangle, Loader } from "lucide-react";
+import { X, Check, Loader } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export type OrderWithProduct = Order & {
@@ -63,7 +63,7 @@ export function OrdersTable({
         <TableHeader className="capitalize">
           <TableRow>
             <TableHead>product</TableHead>
-            <TableHead>user</TableHead>
+            <TableHead>email</TableHead>
             <TableHead>amount</TableHead>
             <TableHead className="px-6">status</TableHead>
           </TableRow>
@@ -72,7 +72,7 @@ export function OrdersTable({
           {orders.map((orders) => (
             <TableRow key={orders.id}>
               <TableCell>{orders.product.name}</TableCell>
-              <TableCell>{orders.user.name}</TableCell>
+              <TableCell>{orders?.user?.email || "--"}</TableCell>
               <TableCell>{orders.amount}</TableCell>
               <TableCell>
                 {isAdmin ? (

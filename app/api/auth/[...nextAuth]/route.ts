@@ -7,8 +7,6 @@ import bcrypt from "bcrypt";
 import { db } from "@/db";
 
 
-// const prisma = new PrismaClient();
-
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(db),
     providers: [
@@ -46,13 +44,14 @@ export const authOptions: AuthOptions = {
             }
         }),
     ],
-    pages: {
-        signIn: '/',
-    },
+    // pages: {
+    //     signIn: '/',
+    // },
     secret: "secret",
     session: {
         strategy: "jwt",
     },
+
 };
 
 export const handler = NextAuth(authOptions);

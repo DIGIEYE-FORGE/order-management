@@ -12,71 +12,64 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useRef,useState } from "react";
 import axios from "axios";
-import { signIn } from "next-auth/react";
-import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 
-export function Login() {
-  const router = useRouter();
-  const [open, setOpen] = useState(false);
+export function SignUp() {
+  const[open, setOpen] = useState(false);
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async () => {
-    signIn("credentials", {
+    axios.post("/api/signup", {
+      // name: nameRef.current?.value,
       email: emailRef.current?.value,
       password: passwordRef.current?.value,
-      redirect: false,
-      // callbackUrl: "/",
+    }).then((res) => {
+      console.log(res);
+      setOpen(false);
+    }).catch((err) => {
+      console.log(err);
     })
-      .then((res) => {
-        // console.log(res);
-        // setOpen(false);
-        if (res?.ok) {
-          router.refresh();
-          console.log(res.error);
-          setOpen(false);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
   const handleOpen = (open: boolean) => {
     console.log(open);
     setOpen(open);
-  };
+  }
   return (
     <Dialog onOpenChange={handleOpen} open={open}>
       <DialogTrigger asChild>
         <Button variant="outline" className="ml-auto" size="sm">
-          Sign IN
+          Sign Up
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Sign In </DialogTitle>
+          <DialogTitle>Sign Up </DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="name" className="text-right">
+              name
+            </Label>
+            <Input id="name" ref={nameRef} className="col-span-3" />
+          </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="email" className="text-right">
               email
             </Label>
-            <Input id="email" className="col-span-3" ref={emailRef} />
+            <Input id="email"  className="col-span-3" ref={emailRef} />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="password" className="text-right">
               password
             </Label>
-            <Input id="password" className="col-span-3" ref={passwordRef} />
+            <Input id="password" type="text" className="col-span-3" ref={passwordRef} />
           </div>
         </div>
         <DialogFooter>
-          <Button type="submit" onClick={handleSubmit}>
-            SignIn
-          </Button>
+          <Button type="submit" onClick={handleSubmit}>SignUp</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

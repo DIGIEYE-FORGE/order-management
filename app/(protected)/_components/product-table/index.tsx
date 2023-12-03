@@ -10,7 +10,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { stringify } from "@/lib/utils";
 import { Product } from "@prisma/client";
 
 export function ProductsTable({ products }: { products: Product[] }) {

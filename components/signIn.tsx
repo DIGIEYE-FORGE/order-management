@@ -50,7 +50,7 @@ export function Login() {
   return (
     <Dialog onOpenChange={handleOpen} open={open}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="ml-auto" size="sm">
+        <Button variant="outline" size="sm">
           Sign In
         </Button>
       </DialogTrigger>

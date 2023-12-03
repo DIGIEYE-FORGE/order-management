@@ -3,16 +3,11 @@ import React from "react";
 import { OrdersTable } from "../_components/order-table";
 import AddOrder from "../_components/add-order";
 import getCurrentUser from "@/actions/get-current-user";
-// import { useRouter } from "next/navigation";
 
 export default async function OrderPage() {
-  // const router = useRouter();
-
   const user = await getCurrentUser();
 
   if (!user) {
-    // redirect to /
-    
     return null;
   }
 
@@ -31,7 +26,7 @@ export default async function OrderPage() {
       <div className="flex justify-end">
         <AddOrder products={products} />
       </div>
-      <OrdersTable orders={orders} />
+      <OrdersTable isAdmin={user.role === "ADMIN"} orders={orders} />
     </div>
   );
 }

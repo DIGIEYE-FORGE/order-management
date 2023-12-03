@@ -54,7 +54,7 @@ export function SignUp() {
   return (
     <Dialog onOpenChange={handleOpen} open={open}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="ml-auto" size="sm">
+        <Button variant="outline" size="sm">
           Sign Up
         </Button>
       </DialogTrigger>

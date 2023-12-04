@@ -11,6 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card } from "@/components/ui/card";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -20,6 +21,7 @@ export default async function ProtectedLayout({ children }: LayoutProps) {
   const user = await getCurrentUser();
   return (
     <div className="bg-gray-100 h-full ">
+      <Card className="md:hidden fixed w-64 top-14 bottom-0 left-0 z-10"></Card>
       <div className="h-14 bg-white fixed inset-x-0 top-0 shadow-sm z-10">
         <div
           className="max-w-screen-2xl px-6 mx-auto flex 

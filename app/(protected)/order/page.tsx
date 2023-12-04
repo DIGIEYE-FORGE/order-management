@@ -17,7 +17,7 @@ export default async function OrderPage() {
       product: true,
       user: true,
     },
-    where: { userId: user.role !== "ADMIN" ? user.id : undefined },
+    where: { userId: user?.role !== "ADMIN" ? user.id : undefined },
   });
   const products = await db.product.findMany({
     select: { name: true, id: true },

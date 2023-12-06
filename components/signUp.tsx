@@ -4,55 +4,53 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useRef, useState } from "react";
-import axios from "axios";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/select";
+import { useState } from "react";
+import { signup } from "@/actions/signup";
+import { TInput } from "@/actions/signup/schema";
+import { toast } from "sonner";
+import { FieldErrors } from "@/actions/utils";
+import FormInput from "./form-input";
+import { set } from "zod";
 
 export function SignUp() {
   const [open, setOpen] = useState(false);
-  // const nameRef = useRef<HTMLInputElement>(null);
-  // const emailRef = useRef<HTMLInputElement>(null);
-  // const passwordRef = useRef<HTMLInputElement>(null);
-  // const roleRef = useRef<HTMLInputElement>(null);
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors<TInput>>({});
 
-  const [data, setData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+  const handleOpen = () => {
+    if (open) {
+      setFieldErrors({});
+    }
+    setOpen((prev) => !prev);
+  };
 
-  const handleSubmit = async () => {
-    axios
-      .post("/api/signup", {
-        ...data,
-      })
-      .then((res) => {
-        console.log(res);
-        setOpen(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const handleSubmit = async (formData: FormData) => {
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    const { result, error, fieldErrors } = await signup({
+      name,
+      email,
+      password,
+    });
+    if (error) {
+      toast.error(error);
+    }
+    if (fieldErrors) {
+      toast.error("Please check your input");
+      setFieldErrors(fieldErrors);
+    }
+    if (result) {
+      toast.success("Signed Up");
+      handleOpen();
+    }
   };
-  const handleOpen = (open: boolean) => {
-    setOpen(open);
-  };
+
   return (
-    <Dialog onOpenChange={handleOpen} open={open}>
+    <Dialog open={open} onOpenChange={handleOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" size="sm">
           Sign Up
@@ -62,50 +60,21 @@ export function SignUp() {
         <DialogHeader>
           <DialogTitle>Sign Up </DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              name
-            </Label>
-            <Input
-              id="name"
-              onChange={(e) => {
-                setData({ ...data, name: e.target.value });
-              }}
-              className="col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="email" className="text-right">
-              email
-            </Label>
-            <Input
-              id="email"
-              className="col-span-3"
-              onChange={(e) => {
-                setData({ ...data, email: e.target.value });
-              }}
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="password" className="text-right">
-              password
-            </Label>
-            <Input
-              id="password"
-              type="password"
-              className="col-span-3"
-              onChange={(e) => {
-                setData({ ...data, password: e.target.value });
-              }}
-            />
-          </div>
-        </div>
-        <DialogFooter>
-          <Button type="submit" onClick={handleSubmit}>
+        <form
+          action={handleSubmit}
+          className="flex flex-col gap-4 [&>form-input]:grid "
+        >
+          <FormInput label="name" name="name" errors={fieldErrors.name} />
+          <FormInput label="email" name="email" errors={fieldErrors.email} />
+          <FormInput
+            label="password"
+            name="password"
+            errors={fieldErrors.password}
+          />
+          <Button type="submit" className="mt-4">
             SignUp
           </Button>
-        </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   );

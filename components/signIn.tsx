@@ -66,6 +66,7 @@ export function Login() {
             <Input
               id="email"
               className="col-span-3"
+              type="email"
               onChange={(e) => {
                 setData({ ...data, email: e.target.value });
               }}

@@ -1,16 +1,6 @@
 import getCurrentUser from "@/actions/get-current-user";
-import { Login } from "@/components/signIn";
-import SignOutComponent from "@/components/signOut";
-import { SignUp } from "@/components/signUp";
-import React, { Fragment } from "react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import React from "react";
+import UserButton from "@/components/userButton";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -33,45 +23,7 @@ export default async function ProtectedLayout({ children }: LayoutProps) {
           >
             DIGIORDER
           </span>
-          {!user ? (
-            <>
-              <SignUp />
-              <Login />
-            </>
-          ) : (
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="flex items-center gap-2"
-                  size="sm"
-                >
-                  <span className="hidden md:inline-block capitalize">
-                    {user?.name}
-                  </span>
-                  <Avatar className="w-6 h-6">
-                    <AvatarImage
-                      src="https://github.com/shadcn.png"
-                      alt="@shadcn"
-                    />
-                    <AvatarFallback>
-                      {user?.name?.[0].toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent
-                align="end"
-                className="flex p-0 py-3 flex-col max-w-min"
-                side="bottom"
-                sideOffset={6}
-              >
-                <span className="px-3 truncate py-2">{user.email}</span>
-                <Separator />
-                <SignOutComponent />
-              </PopoverContent>
-            </Popover>
-          )}
+          <UserButton />
         </div>
       </div>
       <div className="h-full  pt-14 max-w-screen-2xl mx-auto">{children}</div>
